@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Linking } from 'react-native';
 import Card from './Card';
 import CardSection from './CardSection';
 import Button from './Button';
 
 const AlbumDetails = ({ album }) => {    //mempermudah dari (props)
-    const { thumbnail_image, title, artist, image } = album;   //mempermudah dari props.album.title
+    const { thumbnail_image, title, artist, image, url } = album;   //mempermudah dari props.album.title
     const { thumbnailStyle, containerTextStyle, containerThumbnailStyle, titleStyle, imageStyle } = style;    //memperudah dari style.text 
 // const AlbumDetails = (props) => {
     return (
@@ -26,7 +26,8 @@ const AlbumDetails = ({ album }) => {    //mempermudah dari (props)
                 />
             </CardSection>
             <CardSection>
-                <Button onPressBtn={() => console.log('pressed!')}/>
+                <Button onPressBtn={() => Linking.openURL(url)} /> 
+                {/* linking untuk pindah ke apps lain */}
             </CardSection>
         </Card>
     );
