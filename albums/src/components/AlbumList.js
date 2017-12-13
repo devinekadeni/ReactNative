@@ -28,8 +28,9 @@ class AlbumList extends Component {
     }
 
     renderAlbums() {
-        return this.state.albums.map(album =>           //map => iteration value of array
-        <AlbumDetails key={album.title} album={album} />); //harus ada key dan unique
+        return this.state.albums.map(album =>           //map => mgebongkar isi2 dalem arraynya, looping sebanyak isinya
+        <AlbumDetails key={album.title} albumContainer={album} />); //key digunakan sebagai unique id nya, untuk pembeda
+                                                          //result album di line 31, dimasukin ke variable albumContainer which is defined di AlbumDetails
     }
 
     render() {

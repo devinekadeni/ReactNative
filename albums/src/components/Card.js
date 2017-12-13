@@ -5,6 +5,10 @@ const card = (props) => {
     return (
         <View style={styles.containerStyle}>
             {props.children}
+            {/* props.children = supaya di dalem view ini, dapat didefine view lain nya */}
+            {/* props.children = children */}
+            {/* kalo parameter define props, maka di bawah define nya {props.children} */}
+            {/* kalo parameter define {children}, maka di bawah define nya {children} aja */}
         </View>
     );
 };

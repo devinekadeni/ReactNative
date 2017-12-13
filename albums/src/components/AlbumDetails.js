@@ -4,8 +4,8 @@ import Card from './Card';
 import CardSection from './CardSection';
 import Button from './Button';
 
-const AlbumDetails = ({ album }) => {    //mempermudah dari (props)
-    const { thumbnail_image, title, artist, image, url } = album;   //mempermudah dari props.album.title
+const AlbumDetails = ({ albumContainer }) => {    //mempermudah dari (props)
+    const { thumbnail_image, title, artist, image, url } = albumContainer;   //mempermudah dari props.album.title
     const { thumbnailStyle, containerTextStyle, containerThumbnailStyle, titleStyle, imageStyle } = style;    //memperudah dari style.text 
 // const AlbumDetails = (props) => {
     return (
@@ -26,7 +26,7 @@ const AlbumDetails = ({ album }) => {    //mempermudah dari (props)
                 />
             </CardSection>
             <CardSection>
-                <Button onPressBtn={() => Linking.openURL(url)} /> 
+                <Button onPressBtn={() => Linking.openURL(url)}>Buy Now</Button> 
                 {/* linking untuk pindah ke apps lain */}
             </CardSection>
         </Card>

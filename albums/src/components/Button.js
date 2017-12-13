@@ -1,12 +1,18 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
-const Button = ({ onPressBtn }) => {
+const Button = ({ onPressBtn, children }) => {
     const { buttonStyle, textStyle } = style;
 
     return (
         <TouchableOpacity onPress={onPressBtn} style={buttonStyle} > 
-            <Text style={textStyle} >Click me</Text>
+            <Text style={textStyle} >
+                { children }
+                {/* props.children = supaya di dalem view ini, dapat didefine view lain nya */}
+                {/* props.children = children */}
+                {/* kalo parameter define props, maka di bawah define nya {props.children} */}
+                {/* kalo parameter define {children}, maka di bawah define nya {children} aja */}
+            </Text>
         </TouchableOpacity>
     );
 };
