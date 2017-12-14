@@ -22,7 +22,7 @@ class AlbumList extends Component {
     // }
 
     state = { albums: [] };   //penampung data sementara untuk http
-    componentWillMount() {
+    componentWillMount() {    //function bawaan dari component, berfungsi sebagai lifecycle sebelum rendering dan reader
         axios.get('https://rallycoding.herokuapp.com/api/music_albums')
             .then(response => this.setState({ albums: response.data })); //isi data state dengan setState
     }
@@ -33,7 +33,7 @@ class AlbumList extends Component {
                                                           //result album di line 31, dimasukin ke variable albumContainer which is defined di AlbumDetails
     }
 
-    render() {
+    render() {      //function bawaan dari component, berfungsi untuk rendering jsx ke page
         return (
             <ScrollView>
                 { this.renderAlbums() }

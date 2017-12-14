@@ -14,6 +14,6 @@ const style = {
         borderWidth: 1,
         borderColor: '#F3f3f3'
     }
-}
+};
 
 export { Button };
