@@ -78,7 +78,7 @@ class LoginForm extends Component {
 
                 <CardSection>
                     {/* <Button btnOnPress={this.onButtonPress.bind(this)}> */}
-                    {/* bind supaya email-password bisa dibacadi dalem */}
+                    {/* bind supaya email-password bisa dibaca di dalem */}
                         {/* Login */}
                     {/* </Button> */}
                     {this.renderButton()}
@@ -94,6 +94,6 @@ const style = {
         color: 'red',
         alignSelf: 'center'
     }
-}
+};
 
 export default LoginForm;

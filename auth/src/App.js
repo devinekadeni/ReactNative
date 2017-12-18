@@ -16,7 +16,8 @@ class App extends Component {
             messagingSenderId: '714815779184'
         });
 
-        firebase.auth().onAuthStateChanged((user) => {  //function triggered kalo status auth berubah
+        firebase.auth().onAuthStateChanged((user) => {  /*function triggered kalo status auth berubah
+                                                        user akan return true kalo status masih logged in*/
             if (user) {
                 this.setState({ loggedIn: true });
             } else {

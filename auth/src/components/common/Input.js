@@ -8,7 +8,7 @@ const Input = ({ label, valueVar, onChangeTextVar, placeHolderVar, secureTextEnt
         <View style={containerStyle} >
             <Text style={labelStyle}>{label}</Text>
             <TextInput 
-                //untuk props boolean, ga perlu ngisi, nulis nama propsnya dianggep true, 0 / undefined dianggep false
+                //untuk props boolean, ga perlu ngisi, nulis nama propsnya dianggep true, 0 / undefined (ga diisi) dianggep false
                 secureTextEntry={secureTextEntryVar}
                 placeholder={placeHolderVar}
                 autoCorrect={false}

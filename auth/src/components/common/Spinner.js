@@ -15,6 +15,6 @@ const style = {
         justifyContent: 'center',
         alignItems: 'center'
     }
-}
+};
 
 export { Spinner };
