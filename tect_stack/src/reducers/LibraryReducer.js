@@ -1,4 +1,4 @@
 import data from './LibraryList.json';
 
 export default () => data;
-//melempar data sesai data json
+//melempar data sesuai data json

@@ -9,10 +9,12 @@ import LibraryList from './components/LibraryList';
 const App = () => {
     return (
         // provider hanya boleh punya 1 children
-        <Provider store={createStore(reducers)}>    
+        <Provider store={createStore(reducers)}>  
+        {/* reducers return data berupa state, disimpan di store, ditampung di provider */}
             <View>
                 <Header headerTitle="Tech Stack" />
-                <LibraryList />     
+                <LibraryList />   
+                {/* state dari provider dilempar ke LibraryList via connect */}  
             </View>
         </Provider>
     );

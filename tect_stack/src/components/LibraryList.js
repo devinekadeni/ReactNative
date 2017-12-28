@@ -9,7 +9,7 @@ class LibraryList extends Component {
 }
 
 const mapStateToProps = state => { //state sebagai penampung variable state global yg ada di store
-    return { libraries: state.libraries };
+    return { libraries: state.libraries2 };  //dengan mereturn object di sini, maka hasilnya akan jadi props di component LibraryList (render())
     // console.log(state);
 };
 //variable state itu dilempar di connect() supaya bisa terbaca
