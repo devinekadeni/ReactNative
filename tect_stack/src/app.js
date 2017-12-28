@@ -11,7 +11,8 @@ const App = () => {
         // provider hanya boleh punya 1 children
         <Provider store={createStore(reducers)}>  
         {/* reducers return data berupa state, disimpan di store, ditampung di provider */}
-            <View>
+            <View style={{ flex: 1 }}>
+            {/* membuat layar full sampee bawah, instead of content */}
                 <Header headerTitle="Tech Stack" />
                 <LibraryList />   
                 {/* state dari provider dilempar ke LibraryList via connect */}  
