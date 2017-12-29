@@ -9,10 +9,11 @@ import LibraryList from './components/LibraryList';
 const App = () => {
     return (
         // provider hanya boleh punya 1 children
+        // provider adalah penghubung antara redux dan react
         <Provider store={createStore(reducers)}>  
         {/* reducers return data berupa state, disimpan di store, ditampung di provider */}
             <View style={{ flex: 1 }}>
-            {/* membuat layar full sampee bawah, instead of content */}
+            {/* flex: 1 ,membuat layar full sampee bawah, instead of content */}
                 <Header headerTitle="Tech Stack" />
                 <LibraryList />   
                 {/* state dari provider dilempar ke LibraryList via connect */}  
