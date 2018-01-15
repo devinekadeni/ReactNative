@@ -2,8 +2,9 @@ import React from 'react';
 import { View } from 'react-native';
 
 const CardSection = (props) => {
-    return (
-        <View style={style.cardSectionStyle} >
+    return (//style[] supaya bisa niban. normalnya pake yg sebelah kiri, kalo ada tambahan khusus ditaro di kanan, akan niban yg kiri
+        <View style={[style.cardSectionStyle, props.style]} > 
+
             {props.children}
         </View>
     );
