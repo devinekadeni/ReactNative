@@ -1,5 +1,5 @@
 import EStylesheet from 'react-native-extended-stylesheet';
-import { StatusBar } from 'react-native';
+// import { StatusBar } from 'react-native';
 
 export default EStylesheet.create({
     container: {
@@ -10,9 +10,9 @@ export default EStylesheet.create({
         '@media ios': {
             paddingTop: 20,
         },
-        '@media android': {
-            paddingTop: StatusBar.currentHeight,
-        }
+        // '@media android': {
+        //     paddingTop: StatusBar.currentHeight,
+        // }
     },
     button: {
         alignSelf: 'flex-end',
