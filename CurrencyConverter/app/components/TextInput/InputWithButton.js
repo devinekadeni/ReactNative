@@ -29,7 +29,7 @@ const InputWithButton = (props) => {
 InputWithButton.propTypes = {
     onPress: PropTypes.func,
     buttonText: PropTypes.string,
-    editable: PropTypes.boolean,
+    editable: PropTypes.bool,
 };
 
 export default InputWithButton;
