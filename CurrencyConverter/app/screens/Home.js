@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import Proptypes from 'prop-types';
 import { connect } from 'react-redux';
 import { StatusBar, KeyboardAvoidingView } from 'react-native';
+import { connectAlert } from '../components/Alert';
+
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
 import { ClearButton } from '../components/Button';
 import { LastConverted } from '../components/Text';
 import { Header } from '../components/Header';
-import { swapCurrency, changeCurrencyAmount } from '../actions/currencies';
+import { swapCurrency, changeCurrencyAmount, getInitialConversion } from '../actions/currencies';
 
 
 class Home extends Component {
@@ -21,7 +23,24 @@ class Home extends Component {
         conversionRate: Proptypes.number,
         isFetching: Proptypes.bool,
         lastConvertedDate: Proptypes.object,
+        primaryColor: Proptypes.string,
+        alertWithType: Proptypes.func,
+        currencyError: Proptypes.string,
     };
+
+    componentWillMount() {
+        this.props.dispatch(getInitialConversion());
+        // console.log('mounted');
+    }
+
+    componentWillReceiveProps(nextProps) {
+        // console.log('masuk');
+        if (nextProps.currencyError && !this.props.currencyError) {
+            this.props.alertWithType('error', 'Error', nextProps.currencyError);
+            // console.log('gagal');
+        }
+    }
+
     handlerPressBaseCurrency = () => {
         // console.log('press base');
         this.props.navigation.navigate('CurrencyList', { title: 'Base Currency', type: 'base' }); 
@@ -57,7 +76,7 @@ class Home extends Component {
         }
 
         return (
-            <Container>
+            <Container backgroundColor={this.props.primaryColor} >
                 <StatusBar
                     translucent={false} //android
                     barStyle="light-content"
@@ -66,19 +85,21 @@ class Home extends Component {
                     onPress={this.handleOptionsPress}
                 />
                 <KeyboardAvoidingView behavior="padding">
-                    <Logo />
+                    <Logo tintColor={this.props.primaryColor} />
                     <InputWithButton 
                         buttonText={this.props.baseCurrency}
                         onPress={this.handlerPressBaseCurrency}
                         defaultValue={this.props.amount.toString()}
                         keyboardType="numeric"
                         onChangeText={this.handleTextChange}
+                        textColor={this.props.primaryColor}
                     />
                     <InputWithButton 
                         buttonText={this.props.quoteCurrency}
                         onPress={this.handlerPressQuoteCurrency}
                         editable={false}
                         value={quotePrice}
+                        textColor={this.props.primaryColor}
                     />
                     <LastConverted 
                         base={this.props.baseCurrency}
@@ -110,7 +131,9 @@ const mapsStateToProps = (state) => {
         isFetching: conversionSelector.isFetching,
         lastConvertedDate: conversionSelector.date ? 
             new Date(conversionSelector.date) : new Date(),
+        primaryColor: state.theme.primaryColor,
+        currencyError: state.currencies.error,
     };
 };
 
-export default connect(mapsStateToProps)(Home);
+export default connect(mapsStateToProps)(connectAlert(Home));

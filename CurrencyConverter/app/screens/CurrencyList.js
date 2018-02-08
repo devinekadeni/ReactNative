@@ -7,14 +7,13 @@ import { ListItem, Separator } from '../components/List';
 import currencies from '../data/currencies';
 import { changeBaseCurrency, changeQuoteCurrency } from '../actions/currencies';
 
-const TEMP_CURRENT_CURRENCY = 'CAD';
-
 class CurrencyList extends Component {
     static propTypes = {
         navigation: PropTypes.object,
         dispatch: PropTypes.func,
         baseCurrency: PropTypes.string,
         quoteCurrency: PropTypes.string,
+        primaryColor: PropTypes.string,
     };
     handlePress = (currency) => {
         const { type } = this.props.navigation.state.params;
@@ -44,6 +43,7 @@ class CurrencyList extends Component {
                             text={item}
                             selected={item === comparisonCurrency}
                             onPress={() => this.handlePress(item)}
+                            iconBackground={this.props.primaryColor}
                             // checkmark={false}
                             // visible={false}
                         />
@@ -61,6 +61,7 @@ const mapStateToProps = (state) => {
     return {
         baseCurrency: state.currencies.baseCurrency,
         quoteCurrency: state.currencies.quoteCurrency,
+        primaryColor: state.theme.primaryColor,
     };
 };
 
