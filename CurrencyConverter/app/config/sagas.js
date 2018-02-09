@@ -2,7 +2,7 @@ import { takeEvery, select, call, put } from 'redux-saga/effects';
 
 import { SWAP_CURRENCY, CHANGE_BASE_CURRENCY, GET_INITIAL_CONVERSION, CONVERSION_RESULT, CONVERSION_ERROR } from '../actions/currencies';
 
-const getLatestRate = currency => fetch(`http://api.fixer.io/latest?base=${currency}asdas`);
+const getLatestRate = currency => fetch(`http://api.fixer.io/latest?base=${currency}`);
 
 function* fetchLatestConversionRates(action) {
     // console.log('TODO: Update the things', action);
