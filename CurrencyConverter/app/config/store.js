@@ -10,7 +10,7 @@ const sagaMiddleware = createSagaMiddleware();
 const middleware = [sagaMiddleware];
 
 if (process.env.NODE_ENV === 'development') {  //jika ini di development
-    middleware.push(logger);
+    middleware.push(logger); //selalu dipush terakhir
 }
 
 const store = createStore(reducers, applyMiddleware(...middleware)); 

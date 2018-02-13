@@ -16,7 +16,7 @@ function* fetchLatestConversionRates(action) {
         if (currency === undefined) {
             currency = yield select(state => state.currencies.baseCurrency);
         }
-        const response = yield call(getLatestRate, currency);
+        const response = yield call(getLatestRate, currency); //currency jadi parameter untuk getLatestRate()
         const result = yield response.json();
 
         if (result.error) {
@@ -31,7 +31,7 @@ function* fetchLatestConversionRates(action) {
 }
 
 export default function* rootSaga() {
-    yield takeEvery(GET_INITIAL_CONVERSION, fetchLatestConversionRates); //everytime arg1 happens, wanna do arg2 (generator)
+    yield takeEvery(GET_INITIAL_CONVERSION, fetchLatestConversionRates); //everytime arg1 happens, wanna do arg2 (generator) by passing an action as parameter
     yield takeEvery(SWAP_CURRENCY, fetchLatestConversionRates);
     yield takeEvery(CHANGE_BASE_CURRENCY, fetchLatestConversionRates);
 }
