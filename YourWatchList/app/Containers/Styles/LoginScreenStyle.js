@@ -22,6 +22,8 @@ export default StyleSheet.create({
     marginTop: ratioHeight(20),
     paddingHorizontal: ratioWidth(10),
     fontSize: moderateScale(18),
+    paddingBottom: ratioHeight(5),
+    color: '#777676',
   },
   forgotPass: {
     fontSize: moderateScale(12),

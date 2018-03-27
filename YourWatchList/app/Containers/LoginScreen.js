@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, StatusBar, KeyboardAvoidingView, Keyboard } from 'react-native';
-import styles from './Styles/HomeScreenStyle';
+import PropTypes from 'prop-types';
+
+import styles from './Styles/LoginScreenStyle';
 import { ratioWidth, ratioHeight } from '../Transform/Scalling';
 
 class HomeScreen extends Component {
+  static propTypes = {
+    navigation: PropTypes.object,
+  }
+
   constructor(props) {
     super(props);
     this.logoImageWidth = ratioWidth(240);
@@ -62,7 +68,7 @@ class HomeScreen extends Component {
             <TouchableOpacity>
               <Text style={styles.forgotPass} >Forgot Password?</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} >
+            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Otp')} >
               <Text style={styles.textButton} >Submit</Text>
             </TouchableOpacity>
           </View>
@@ -70,6 +76,7 @@ class HomeScreen extends Component {
       </View>
     );
   }
+
 }
 
 export default HomeScreen;
