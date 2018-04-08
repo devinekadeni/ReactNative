@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { View, Animated, PanResponder, Dimensions } from 'react-native';
+import { View, Animated, PanResponder, Dimensions, Text, LayoutAnimation, UIManager, onAnimationDidEnd } from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.50;
 const SWIPE_OUT_DURATION = 250;
 
 class Deck extends Component {
+  static defaultProps = {
+    onSwipeLeft: () => {},
+    onSwipeRight: () => {},
+  }
+
   constructor(props) {
     super(props);
 
@@ -22,7 +27,7 @@ class Deck extends Component {
         } else if (gesture.dx < -SWIPE_THRESHOLD) {
           this.forceSwipe('left');
         } else {
-          alert('out of range');
+          // alert('out of range');
           this.resetPosition();
         }
       },
@@ -30,14 +35,33 @@ class Deck extends Component {
 
     this.state = {
       panResponder,
-      position
+      position,
+      index: 0,
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.data !== this.props.data) {
+      this.setState({ index: 0 });
+    }
+  }
+
+  componentWillUpdate() {
+    // supaya waktu abis swipe, deck nya bouncing naik
+    // if UIManager.setlayout...... exist, jalankan UIManager.setlayout...(true)
+    // UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+    // buat semua animation di layout, jadi spring
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring, onAnimationDidEnd);
+    // LayoutAnimation.spring();
+    // supaya waktu abis swipe, deck nya bouncing naik
+  }
+
   onSwipeComplete(direction) {
-    // const { onSwipeLeft, onSwipeRight } = this.props;
-    // direction === 'right' ? onSwipeRight() : onSwipeLeft();
-    alert('done');
+    const { onSwipeLeft, onSwipeRight } = this.props;
+    const item = this.props.data[this.state.index];
+    direction === 'right' ? onSwipeRight(item) : onSwipeLeft(item);
+    this.state.position.setValue({ x: 0, y: 0 });
+    this.setState({ index: this.state.index+1 });
   }
 
   forceSwipe(direction) {
@@ -68,29 +92,47 @@ class Deck extends Component {
   }
 
   renderCards() {
-    return this.props.data.map((item, index) => {
-      if (index === 0) {
+    if (this.state.index >= this.props.data.length) {
+      return this.props.renderNoMoreCards();
+    }
+
+    return this.props.data.map((item, i) => {
+      if (i < this.state.index) { return null; }
+      if (i === this.state.index) {
         return (
           <Animated.View
             key={item.id}
-            style={this.getCardStyle()}
+            style={[this.getCardStyle(), styles.cardStyle, { zIndex: i * -1 }]}
             {...this.state.panResponder.panHandlers}
           >
             {this.props.renderCard(item)}
           </Animated.View>
         );
       }
-      return this.props.renderCard(item);
-    })
+      return (
+        <Animated.View key={item.id} style={[styles.cardStyle, { zIndex: i * -1, top: 10 * (i - this.state.index) }]}>
+          {this.props.renderCard(item)}
+        </Animated.View>
+      );
+    });
   }
 
   render() {
     return (
       <View>
+        <Text>halo</Text>
         {this.renderCards()}
+        <Text>helllllll</Text>
       </View>        
     );
   }
 }
+
+const styles = {
+  cardStyle: {
+    position: 'absolute',
+    width: SCREEN_WIDTH,
+  }
+};
 
 export default Deck;
